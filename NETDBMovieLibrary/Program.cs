@@ -6,7 +6,17 @@ namespace NETDBMovieLibrary
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Menu menu = new Menu();
+
+            while (!menu.ExitNow)
+            {
+                char selection = menu.GetUserSelection();
+                menu.ProcessSelection(selection);
+                if (!menu.ExitNow)
+                {
+                    menu.DisplayMenu();
+                }
+            }
         }
     }
 }
