@@ -4,12 +4,12 @@ using System.IO;
 
 namespace NETDBMovieLibrary
 {
-    public class MovieListDisplay
+    public class MovieListDisplay : ListDisplay
     {
         private const int ID_COLUMN_SIZE = -10;
         private const int TITLE_COLUMN_SIZE = -50;
         private const int GENRE_COLUMN_SIZE = -30;
-        private List<string> MovieList = new List<string>();
+        /*private List<string> MovieList = new List<string>();*/
         private string File = "../../../MovieList/movies.csv";
 
         public MovieListDisplay()
@@ -17,7 +17,7 @@ namespace NETDBMovieLibrary
             CsvToList();
         }
 
-        private void CsvToList()
+        public override void CsvToList()
         {
             while (true)
             {
@@ -31,7 +31,7 @@ namespace NETDBMovieLibrary
                     for (int i = 0; i < userInputNumber; i++)
                     {
                         string movieLine = sr.ReadLine();
-                        MovieList.Add(movieLine);
+                        ListToDisplay.Add(movieLine);
                     }
                     
                     sr.Close();
@@ -43,9 +43,9 @@ namespace NETDBMovieLibrary
             }
         }
 
-        public void DisplayMovieList()
+        public override void DisplayList()
         {
-            foreach (var movie in MovieList)
+            foreach (var movie in ListToDisplay)
             {
                 string[] movieInfo = movie.Split(',');
                 Console.WriteLine($"|{movieInfo[0], ID_COLUMN_SIZE} | {movieInfo[1], TITLE_COLUMN_SIZE} | {movieInfo[2], GENRE_COLUMN_SIZE}");
